@@ -22,6 +22,9 @@ import React, { Component, type Node } from 'react';
 import BpkModal from 'bpk-component-modal';
 import BpkButton from 'bpk-component-button';
 import { BpkButtonLink } from 'bpk-component-link';
+import BpkAutosuggest, {
+  BpkAutosuggestSuggestion,
+} from 'bpk-component-autosuggest';
 
 import modalReadme from 'bpk-component-modal/README.md';
 
@@ -81,6 +84,7 @@ class ModalContainer extends Component<Props, State> {
       <div>
         <BpkButton onClick={this.onOpen}>{buttonText}</BpkButton>
         <BpkModal
+          contentClassName="EDIT ME"
           id="my-modal"
           isOpen={this.state.isOpen}
           onClose={this.onClose}
@@ -103,6 +107,15 @@ class ModalContainer extends Component<Props, State> {
   }
 }
 
+const renderSuggestion = suggestion => (
+  <BpkAutosuggestSuggestion
+    value="1"
+    subHeading={suggestion.country}
+    tertiaryLabel="Airport"
+    indent={suggestion.indent}
+  />
+);
+
 const components = [
   {
     id: 'default',
@@ -123,6 +136,33 @@ const components = [
         <Paragraph>
           You can put anything you want in here, including forms:
         </Paragraph>
+        <BpkAutosuggest
+          value="Selected value"
+          suggestions={[
+            '1',
+            '2',
+            '3',
+            '4',
+            '1',
+            '2',
+            '3',
+            '4',
+            '1',
+            '2',
+            '3',
+            '4',
+          ]}
+          onSuggestionsFetchRequested={null}
+          onSuggestionsClearRequested={null}
+          getSuggestionValue={() => '1'}
+          inputProps={{
+            id: 'my-autosuggest',
+            placeholder: 'Enter an office name',
+            value: 'selected',
+            onChange: null,
+          }}
+          renderSuggestion={renderSuggestion}
+        />
         <LoginFormExample />
       </ModalContainer>,
     ],
