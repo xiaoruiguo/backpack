@@ -15,31 +15,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* @flow */
-import React, { Component, type Node } from 'react';
-import PropTypes from 'prop-types';
-import { requireNativeComponent } from 'react-native';
 
-type Props = {
-  children: Node,
-  padded: boolean,
-};
+#import "BPKPanelWrapperManager.h"
 
-class BpkPanel extends Component<Props, {}> {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    padded: PropTypes.bool,
-  };
+#import "BPKPanelWrapper.h"
 
-  static defaultProps = {
-    padded: true,
-  };
+NS_ASSUME_NONNULL_BEGIN
+@implementation BPKPanelWrapperManager
+RCT_EXPORT_MODULE()
 
-  render() {
-    return <NativePanel {...this.props} />;
-  }
+- (UIView * )view {
+    return [[BPKPanelWrapper alloc] initWithFrame:CGRectZero bridge:self.bridge];
 }
+RCT_EXPORT_VIEW_PROPERTY(padded, BOOL)
 
-const NativePanel = requireNativeComponent('BPKPanelWrapper', BpkPanel);
-
-export default BpkPanel;
+@end
+NS_ASSUME_NONNULL_END

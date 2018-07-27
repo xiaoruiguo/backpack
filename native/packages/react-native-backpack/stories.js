@@ -16,30 +16,16 @@
  * limitations under the License.
  */
 /* @flow */
-import React, { Component, type Node } from 'react';
-import PropTypes from 'prop-types';
-import { requireNativeComponent } from 'react-native';
 
-type Props = {
-  children: Node,
-  padded: boolean,
-};
+import React from 'react';
+import { Text } from 'react-native';
+import { storiesOf } from '@storybook/react-native';
+import BpkText from 'react-native-bpk-component-text';
 
-class BpkPanel extends Component<Props, {}> {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    padded: PropTypes.bool,
-  };
+import { BpkPanel } from './index';
 
-  static defaultProps = {
-    padded: true,
-  };
-
-  render() {
-    return <NativePanel {...this.props} />;
-  }
-}
-
-const NativePanel = requireNativeComponent('BPKPanelWrapper', BpkPanel);
-
-export default BpkPanel;
+storiesOf('react-native-backpack/BPKPanel', module).add('docs:default', () => (
+  <BpkPanel padded={false}>
+    <BpkText>Test</BpkText>
+  </BpkPanel>
+));
